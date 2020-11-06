@@ -9,6 +9,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
@@ -28,8 +30,9 @@ public class Country extends BaseEntity {
 	@Column
 	private String code;
 	@OneToMany(
-			mappedBy = "country", 
 			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY,
 			orphanRemoval = true)
+	@JoinColumn(name = "id")
 	private List<State> states = new ArrayList<>();
 }
